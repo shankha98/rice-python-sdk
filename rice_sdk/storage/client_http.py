@@ -35,7 +35,11 @@ class HttpClient:
     def health(self) -> Dict[str, str]:
         resp = requests.get(f"{self.base_url}/health", headers=self._get_headers())
         resp.raise_for_status()
-        return resp.json()
+        try:
+            return resp.json()
+        except ValueError:
+            # Fallback for plain text response
+            return {"status": resp.text.strip(), "version": "unknown"}
 
     def insert(
         self,
