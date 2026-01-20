@@ -53,19 +53,22 @@ async def main():
         print(f"Found {len(memories)} memories.")
         print("Memories:", memories)
 
-        if len(memories) > 0 and memories[0].input == input_text:
+        # Iterate through memories to find the one we just inserted
+        found_memory = False
+        for memory in memories:
+            # Check if memory has input attribute and it matches
+            if hasattr(memory, "input") and memory.input == input_text:
+                found_memory = True
+                break
+            # Fallback for dictionary access if it returns dicts
+            elif isinstance(memory, dict) and memory.get("input") == input_text:
+                found_memory = True
+                break
+
+        if found_memory:
             print("VERIFICATION PASSED: Retrieved newly inserted memory.")
         else:
-            # Note: reminisce returns Trace objects, ensure we check attributes correctly
-            # Trace object has 'input' attribute.
-            if (
-                len(memories) > 0
-                and hasattr(memories[0], "input")
-                and memories[0].input == input_text
-            ):
-                print("VERIFICATION PASSED: Retrieved newly inserted memory.")
-            else:
-                print("VERIFICATION FAILED: Could not retrieve newly inserted memory.")
+            print("VERIFICATION FAILED: Could not retrieve newly inserted memory.")
 
         # =========================================================================
         # Working Memory (Structured Variables)

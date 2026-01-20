@@ -1,7 +1,40 @@
+# General
+.DS_Store
+
+# Environments
 .env
 .venv/
+venv/
+env/
+
+# Python
 *.pyc
 __pycache__/
+*.pyo
+*.pyd
+.Python
+*.mo
+
+# Packaging
+dist/
+build/
+*.egg-info/
+.eggs/
+
+# Testing and Quality Assurance
+.pytest_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Jupyter
+.ipynb_checkpoints
+
+# IDEs
+.vscode/
+.idea/
+
+# Project specific
 instance/
 .webassets-cache/
-.pytest_cache/
